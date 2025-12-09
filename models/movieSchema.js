@@ -10,7 +10,7 @@ const movieSchema = mongoose.Schema({
         require: true,
     },
     date: {
-        type: Number,
+        type: String,
         require: true,
     },
     rating: {
@@ -21,7 +21,7 @@ const movieSchema = mongoose.Schema({
         type: String,
         require: true,
     },
-    poster: {
+    posterURL: {
         type: String,
         require: true,
     }

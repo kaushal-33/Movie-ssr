@@ -1,0 +1,45 @@
+<%- include("partials/start.ejs")%>
+<div class="container p-4 border rounded shadow-sm">
+  <form method="post" action="/admin/add-movie" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label class="form-label">Movie Name</label>
+      <input type="text" name="name" class="form-control" placeholder="Movie name">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Genre</label>
+      <select name="genre" class="form-select">
+        <option value="" disabled selected>Select genre</option>
+        <option value="action">Action</option>
+        <option value="thriller">Thriller</option>
+        <option value="comedy">Comedy</option>
+        <option value="drama">Drama</option>
+        <option value="romance">Romance</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="biography">Biography</option>
+        <option value="sci-fiction">Sci-fiction</option>
+        <option value="animation">Animation</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Release Date</label>
+      <input type="date" name="date" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Details</label>
+      <textarea name="details" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Poster</label>
+      <input type="file" name="posterURL" class="form-control" accept="image/*">
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+      Submit
+    </button>
+  </form>
+</div>
+<%- include("partials/end.ejs")%>
