@@ -14,6 +14,6 @@ exports.addMovie = async (req, res) => {
         const movieObj = new MovieModel({ ...req.body, photoURL: req.file.path });
         await movieObj.save();
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
