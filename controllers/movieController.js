@@ -1,6 +1,7 @@
 const { name } = require("ejs");
 const MovieModel = require("../models/movieSchema");
-
+const path = require("path");
+const fs = require("fs");
 let movies = [{
     movieName: "dhurandar",
     genre: "action",
@@ -14,7 +15,6 @@ let movies = [{
 exports.adminMovies = async (req, res) => {
     try {
         const movieArr = await MovieModel.find();
-        console.log(movieArr);
         return res.render("adminIndex", { movies, movieArr });
     } catch (error) {
         console.log(error);
@@ -43,7 +43,13 @@ exports.addMovie = async (req, res) => {
 exports.deleteMovie = async (req, res) => {
     try {
         const { id } = req.params;
+        const obj = await MovieModel.findById(id);
         await MovieModel.findByIdAndDelete(id);
+        const filePath = path.join(__dirname, "..", obj?.posterURL);
+        console.log(filePath, obj)
+        fs.unlink(filePath, (err) => {
+            if (err) console.log(err);
+        })
         return res.redirect("/admin");
     } catch (error) {
         console.log(error)
