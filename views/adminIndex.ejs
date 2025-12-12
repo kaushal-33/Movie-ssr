@@ -1,45 +1,159 @@
 <%- include("partials/start.ejs")%>
-<div class="container p-4 border rounded shadow-sm">
-  <form method="post" action="/admin/add-movie" enctype="multipart/form-data">
-    <div class="mb-3">
-      <label class="form-label">Movie Name</label>
-      <input type="text" name="name" class="form-control" placeholder="Movie name">
+  <main class="overflow-x-hidden">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="text-white text-uppercase m-0" id="title">moviehub</h2>
+        <button id="toggleSidebar" class="btn btn-dark">
+          ☰
+        </button>
+      </div>
+      <div class="flex-column d-flex gap-2 mt-5">
+        <a href="/admin"><span>Dashboard</span></a>
+        <a href="/admin/movies"><span>Movies</span></a>
+        <a href="/admin/users"><span>Users</span></a>
+        <a href="/admin/settings"><span>Settings</span></a>
+        <a href="/logout"><span>Logout</span></a>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2 class="fw-bold">Movies</h2>
+        <a href="/admin/add-movie" class="btn btn-primary">+ Add Movie</a>
+      </div>
+      <!-- Movies Grid -->
+      <div class="row g-4 mb-4">
+        <% movieArr.forEach(movie=> { %>
+          <div class="col-md-3">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+              <!-- Poster -->
+              <div class="w-100">
+                <img src="<%= movie.posterURL %>" width="100%" height="250" alt="<%=movie.movieName%>">
+              </div>
+              <div class="card-body">
+
+                <!-- Movie Name -->
+                <h5 class="card-title fw-bold">
+                  <%= movie.movieName %>
+                </h5>
+
+                <!-- Genre Badge -->
+                <span class="badge bg-primary mb-2">
+                  <%= movie.genre %>
+                </span>
+
+                <!-- Rating Badge -->
+                <span class="badge bg-warning text-dark mb-2">
+                  ⭐ <%= movie.rating %>/10
+                </span>
+
+                <!-- Release Date -->
+                <p class="text-muted mb-1" style="font-size: 14px;">
+                  <i class="bi bi-calendar-event"></i>
+                  <strong>Release:</strong>
+                  <%= movie.date %>
+                </p>
+
+                <!-- Short Details -->
+                <p class="card-text" style="font-size: 14px;">
+                  <%= movie.details %>...
+                </p>
+
+                <!-- CRUD Buttons -->
+                <div class="d-flex justify-content-between mt-3">
+
+                  <a href="/admin/movies/<%= movie._id %>" class="btn btn-outline-secondary btn-sm w-100 me-2">
+                    View
+                  </a>
+
+                  <a href="/admin/movies/edit/<%= movie._id %>" class="btn btn-outline-warning btn-sm w-100 me-2">
+                    Edit
+                  </a>
+                  <a class="btn btn-outline-danger btn-sm w-100" href="/admin/delete-movie/<%=movie.id%>">
+                    Delete
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <% }) %>
+      </div>
+      <div class="row g-4">
+        <% movies.forEach(movie=> { %>
+          <div class="col-md-3">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+              <!-- Poster -->
+              <div class="w-100">
+                <img src="<%= movie.posterURL %>" width="100%" height="250" alt="<%=movie.movieName%>">
+              </div>
+              <div class="card-body">
+
+                <!-- Movie Name -->
+                <h5 class="card-title fw-bold">
+                  <%= movie.movieName %>
+                </h5>
+
+                <!-- Genre Badge -->
+                <span class="badge bg-primary mb-2">
+                  <%= movie.genre %>
+                </span>
+
+                <!-- Rating Badge -->
+                <span class="badge bg-warning text-dark mb-2">
+                  ⭐ <%= movie.rating %>/10
+                </span>
+
+                <!-- Release Date -->
+                <p class="text-muted mb-1" style="font-size: 14px;">
+                  <i class="bi bi-calendar-event"></i>
+                  <strong>Release:</strong>
+                  <%= movie.date %>
+                </p>
+
+                <!-- Short Details -->
+                <p class="card-text" style="font-size: 14px;">
+                  <%= movie.details %>...
+                </p>
+
+                <!-- CRUD Buttons -->
+                <div class="d-flex justify-content-between mt-3">
+
+                  <a href="/admin/movies/<%= movie._id %>" class="btn btn-outline-secondary btn-sm w-100 me-2">
+                    View
+                  </a>
+
+                  <a href="/admin/movies/edit/<%= movie._id %>" class="btn btn-outline-warning btn-sm w-100 me-2">
+                    Edit
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <% }) %>
+      </div>
+
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Genre</label>
-      <select name="genre" class="form-select">
-        <option value="" disabled selected>Select genre</option>
-        <option value="action">Action</option>
-        <option value="thriller">Thriller</option>
-        <option value="comedy">Comedy</option>
-        <option value="drama">Drama</option>
-        <option value="romance">Romance</option>
-        <option value="fantasy">Fantasy</option>
-        <option value="biography">Biography</option>
-        <option value="sci-fiction">Sci-fiction</option>
-        <option value="animation">Animation</option>
-      </select>
-    </div>
+    <!-- JS for Sidebar Toggle -->
+    <script>
+      const toggleButton = document.getElementById("toggleSidebar");
+      const sidebar = document.getElementById("sidebar");
+      const mainContent = document.getElementById("mainContent");
+      const title = document.getElementById("title");
 
-    <div class="mb-3">
-      <label class="form-label">Release Date</label>
-      <input type="date" name="date" class="form-control">
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Details</label>
-      <textarea name="details" class="form-control" rows="4"></textarea>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Poster</label>
-      <input type="file" name="posterURL" class="form-control" accept="image/*">
-    </div>
-
-    <button type="submit" class="btn btn-primary w-100">
-      Submit
-    </button>
-  </form>
-</div>
-<%- include("partials/end.ejs")%>
+      toggleButton.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+        mainContent.classList.toggle("expanded");
+        toggleButton.classList.toggle("collapsed");
+        title.classList.toggle("d-none");
+      });
+    </script>
+  </main>
+  <%- include("partials/end.ejs")%>

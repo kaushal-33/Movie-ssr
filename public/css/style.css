@@ -1,0 +1,49 @@
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #212529;
+    padding-top: 20px;
+    transition: all 0.3s ease;
+    padding: 10px;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+
+.sidebar a {
+    color: #adb5bd;
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar.collapsed a span {
+    display: none;
+    /* Hide text when collapsed */
+}
+
+.sidebar.collapsed a {
+    text-align: center;
+}
+
+/* Content */
+.main-content {
+    margin-left: 240px;
+    padding: 30px;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+    margin-left: 70px;
+}
+
+#toggleSidebar.collapsed {
+    left: 80px;
+}
