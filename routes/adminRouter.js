@@ -7,5 +7,6 @@ router.get("/", adminMovies);
 router.post("/add-movie", upload.single("posterURL"), addMovie)
 router.get("/add-movie", movieForm);
 router.get("/delete-movie/:id", deleteMovie);
+router.get("/admin/update-movie/:id");
 
 module.exports = router;

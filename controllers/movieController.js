@@ -55,3 +55,12 @@ exports.deleteMovie = async (req, res) => {
         console.log(error)
     }
 }
+
+exports.getMovie = async (req, res) => {
+    try {
+        const obj = await MovieModel.findById(req.params.id);
+        return res.render("")
+    } catch (error) {
+        console.log(error);
+    }
+}
