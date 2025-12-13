@@ -9,11 +9,11 @@
       </button>
     </div>
     <div class="flex-column d-flex gap-2 mt-5">
-      <a href="/admin"><span>Dashboard</span></a>
-      <a href="/admin/movies"><span>Movies</span></a>
-      <a href="/admin/users"><span>Users</span></a>
-      <a href="/admin/settings"><span>Settings</span></a>
-      <a href="/logout"><span>Logout</span></a>
+      <a href="/"><span>Home</span></a>
+      <a href="#"><span>Movies</span></a>
+      <a href="#"><span>Users</span></a>
+      <a href="#"><span>Settings</span></a>
+      <a href="#"><span>Logout</span></a>
     </div>
   </div>
   <!-- Main Content -->
@@ -63,11 +63,11 @@
 
             <!-- CRUD Buttons -->
             <div class="d-flex justify-content-between mt-3">
-              <a href="/admin/movies/<%= movie._id %>" class="btn btn-outline-secondary btn-sm w-100 me-2">
+              <a href="/admin/view-movie/<%= movie._id %>" class="btn btn-outline-secondary btn-sm w-100 me-2">
                 View
               </a>
               <a href="/admin/update-movie/<%= movie._id %>" class="btn btn-outline-warning btn-sm w-100 me-2">
-                Edit
+                Edit 
               </a>
               <a class="btn btn-outline-danger btn-sm w-100" href="/admin/delete-movie/<%=movie.id%>">
                 Delete

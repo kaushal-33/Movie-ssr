@@ -1,4 +1,3 @@
-const { name } = require("ejs");
 const MovieModel = require("../models/movieSchema");
 const path = require("path");
 const fs = require("fs");
@@ -40,6 +39,15 @@ exports.addMovie = async (req, res) => {
     }
 }
 
+exports.viewMovie = async (req, res) => {
+    try {
+        const movie = await MovieModel.findById(req.params.id);
+        res.render("viewMovie", { movie })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 exports.deleteMovie = async (req, res) => {
     try {
         const { id } = req.params;
@@ -58,9 +66,30 @@ exports.deleteMovie = async (req, res) => {
 
 exports.getMovie = async (req, res) => {
     try {
-        const obj = await MovieModel.findById(req.params.id);
-        return res.render("")
+        const movie = await MovieModel.findById(req.params.id);
+        return res.render("updateForm", { movie });
     } catch (error) {
         console.log(error);
     }
 }
+
+exports.updateMovie = async (req, res) => {
+    try {
+        const updateData = req.body;
+
+        if (req.file) {
+            let obj = await MovieModel.findById(req.params.id);
+            console.log(obj)
+            const filePath = path.join(__dirname, "..", obj?.posterURL);
+            fs.unlink(filePath, (err) => {
+                if (err) console.log(err);
+            })
+            updateData.posterURL = req.file.path;
+        }
+        await MovieModel.findByIdAndUpdate(req.params.id, updateData);
+
+        return res.redirect("/admin");
+    } catch (error) {
+        console.log(error);
+    }
+};
