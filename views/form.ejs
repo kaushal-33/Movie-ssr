@@ -1,56 +1,103 @@
-<%- include("partials/start.ejs")%>
-<div class="container p-4 border rounded shadow-sm">
-  <form method="post" action="/admin/add-movie" enctype="multipart/form-data">
-    <div class="mb-3">
-      <label class="form-label">Movie Name</label>
-      <input type="text" name="movieName" class="form-control" placeholder="Movie name">
+<%- include("partials/start.ejs") %>
+
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-body-tertiary">
+  <div class="card shadow-lg border-0 rounded-4 form-card w-100" style="max-width: 600px;">
+    <div class="card-header bg-transparent border-0 pb-0">
+      <h3 class="fw-bold mb-1">Add New Movie</h3>
+      <p class="text-muted small mb-0">
+        Enter movie details to add it to MovieHub.
+      </p>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Genre</label>
-      <select name="genre" class="form-select">
-        <option value="" disabled selected>Select genre</option>
-        <option value="action">Action</option>
-        <option value="thriller">Thriller</option>
-        <option value="comedy">Comedy</option>
-        <option value="drama">Drama</option>
-        <option value="romance">Romance</option>
-        <option value="fantasy">Fantasy</option>
-        <option value="biography">Biography</option>
-        <option value="sci-fiction">Sci-fiction</option>
-        <option value="animation">Animation</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Rating</label>
-      <select name="rating" class="form-select">
-        <option value="" disabled selected>Select rating</option>
-        <option value="1">⭐</option>
-        <option value="2">⭐⭐</option>
-        <option value="3">⭐⭐⭐</option>
-        <option value="4">⭐⭐⭐⭐</option>
-        <option value="5">⭐⭐⭐⭐⭐</option>
-      </select>
-    </div>
+    <div class="card-body">
+      <form method="post" action="/admin/add-movie" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
-    <div class="mb-3">
-      <label class="form-label">Release Date</label>
-      <input type="date" name="date" class="form-control">
-    </div>
+        <div class="col-12">
+          <label class="form-label fw-semibold">Movie Name</label>
+          <input type="text" name="movieName" class="form-control" placeholder="e.g. Inception" required>
+          <div class="invalid-feedback">
+            Please enter a movie name.
+          </div>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label">Details</label>
-      <textarea name="details" class="form-control" rows="4"></textarea>
-    </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Genre</label>
+          <select name="genre" class="form-select" required>
+            <option value="" disabled selected>Select genre</option>
+            <option value="action">Action</option>
+            <option value="thriller">Thriller</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="romance">Romance</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="biography">Biography</option>
+            <option value="sci-fiction">Sci‑fiction</option>
+            <option value="animation">Animation</option>
+          </select>
+          <div class="invalid-feedback">
+            Please select a genre.
+          </div>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label">Poster</label>
-      <input type="file" name="posterURL" class="form-control" accept="image/*">
-    </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Rating</label>
+          <select name="rating" class="form-select" required>
+            <option value="" disabled selected>Select rating</option>
+            <option value="1">⭐ 1 / 5</option>
+            <option value="2">⭐⭐ 2 / 5</option>
+            <option value="3">⭐⭐⭐ 3 / 5</option>
+            <option value="4">⭐⭐⭐⭐ 4 / 5</option>
+            <option value="5">⭐⭐⭐⭐⭐ 5 / 5</option>
+          </select>
+          <div class="invalid-feedback">
+            Please choose a rating.
+          </div>
+        </div>
 
-    <button type="submit" class="btn btn-primary w-100">
-      Submit
-    </button>
-  </form>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Release Date</label>
+          <input type="date" name="date" class="form-control" required>
+          <div class="invalid-feedback">
+            Please select a release date.
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-semibold">Details</label>
+          <textarea name="details" class="form-control" rows="3" placeholder="Short description of the movie" minlength="10" required></textarea>
+          <div class="invalid-feedback">
+            Please enter at least 10 characters for details.
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-semibold">Poster</label>
+          <input type="file" name="posterURL" class="form-control" accept="image/*" required>
+          <div class="invalid-feedback">
+            Please upload a poster image.
+          </div>
+          <small class="text-muted">Upload a JPG or PNG poster image.</small>
+        </div>
+
+        <div class="col-12 pt-2">
+          <button type="submit" class="btn btn-primary w-100 py-2">
+            Add Movie
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>
-<%- include("partials/end.ejs")%>
+
+<script>
+  document.querySelector('.needs-validation').addEventListener('submit', function(e) {
+    if (!this.checkValidity()) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    this.classList.add('was-validated');
+  });
+</script>
+
+<%- include("partials/end.ejs") %>

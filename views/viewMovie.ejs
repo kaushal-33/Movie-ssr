@@ -1,30 +1,55 @@
 <%- include("partials/start.ejs")%>
 <main class="container my-5">
-  <div class="row">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="movie-card shadow-lg rounded-4 overflow-hidden bg-dark text-light">
+        <div class="row g-0">
 
-    <div class="col-md-4">
-      <img src="/<%=movie.posterURL%>" class="img-fluid rounded shadow" alt="<%= movie.movieName %>">
+          <!-- Poster -->
+          <div class="col-md-4">
+            <div class="h-100 position-relative">
+              <img src="/<%= movie.posterURL %>" class="img-fluid h-100 w-100 object-fit-cover" alt="<%= movie.movieName %>">
+              <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill">
+                ⭐ <%= movie.rating %>/5
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="col-md-8">
+            <div class="p-4 p-md-5">
+              <h1 class="display-5 fw-bold mb-3"><%= movie.movieName %></h1>
+
+              <p class="text-secondary mb-3 small">
+                <span class="me-3">
+                  <i class="bi bi-film me-1"></i>
+                  <strong>Genre:</strong> <%= movie.genre %>
+                </span>
+                <span>
+                  <i class="bi bi-calendar-event me-1"></i>
+                  <strong>Release:</strong> <%= movie.date %>
+                </span>
+              </p>
+
+              <hr class="border-secondary">
+
+              <h5 class="text-uppercase text-secondary fw-semibold small mb-2">
+                Movie Details
+              </h5>
+              <p class="mb-4 lh-lg text-light-50">
+                <%= movie.details %>
+              </p>
+
+              <a href="/admin" class="btn btn-outline-light btn-sm">
+                ⬅ Back to Movies
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-
-    <div class="col-md-8">
-      <h1><%= movie.movieName %></h1>
-
-      <p class="text-muted">
-        <strong>Genre:</strong> <%= movie.genre %> <br>
-        <strong>Release Date:</strong> <%= movie.date %> <br>
-        <strong>Rating:</strong> ⭐ <%= movie.rating %>/5
-      </p>
-
-      <hr>
-
-      <h5>Movie Details</h5>
-      <p><%= movie.details %></p>
-
-      <a href="/admin" class="btn btn-secondary mt-3">
-        ⬅ Back to Movies
-      </a>
-    </div>
-
   </div>
 </main>
+
 <%- include("partials/end.ejs")%>

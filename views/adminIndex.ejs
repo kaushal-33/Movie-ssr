@@ -26,7 +26,7 @@
     <!-- Movies Grid -->
     <div class="row g-4 mb-4">
       <% movieArr.forEach(movie=> { %>
-      <div class="col-md-3">
+      <div class="col-md-6 col-lg-3">
         <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
           <!-- Poster -->
           <div class="w-100">
@@ -50,9 +50,9 @@
             </span>
 
             <!-- Release Date -->
-            <p class="text-muted mb-1" style="font-size: 14px;">
+            <p class="mb-1 text-secondary" style="font-size: 14px;">
               <i class="bi bi-calendar-event"></i>
-              <strong>Release:</strong>
+              <strong class="text-secondary">Release:</strong>
               <%= movie.date %>
             </p>
 
@@ -67,67 +67,11 @@
                 View
               </a>
               <a href="/admin/update-movie/<%= movie._id %>" class="btn btn-outline-warning btn-sm w-100 me-2">
-                Edit 
+                Edit
               </a>
               <a class="btn btn-outline-danger btn-sm w-100" href="/admin/delete-movie/<%=movie.id%>">
                 Delete
               </a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <% }) %>
-    </div>
-    <div class="row g-4">
-      <% movies.forEach(movie=> { %>
-      <div class="col-md-3">
-        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
-          <!-- Poster -->
-          <div class="w-100">
-            <img src="<%= movie.posterURL %>" width="100%" height="250" alt="<%=movie.movieName%>">
-          </div>
-          <div class="card-body">
-
-            <!-- Movie Name -->
-            <h5 class="card-title fw-bold">
-              <%= movie.movieName %>
-            </h5>
-
-            <!-- Genre Badge -->
-            <span class="badge bg-primary mb-2">
-              <%= movie.genre %>
-            </span>
-
-            <!-- Rating Badge -->
-            <span class="badge bg-warning text-dark mb-2">
-              ⭐ <%= movie.rating %>/10
-            </span>
-
-            <!-- Release Date -->
-            <p class="text-muted mb-1" style="font-size: 14px;">
-              <i class="bi bi-calendar-event"></i>
-              <strong>Release:</strong>
-              <%= movie.date %>
-            </p>
-
-            <!-- Short Details -->
-            <p class="card-text" style="font-size: 14px;">
-              <%= movie.details %>...
-            </p>
-
-            <!-- CRUD Buttons -->
-            <div class="d-flex justify-content-between mt-3">
-
-              <a href="/admin/movies/<%= movie._id %>" class="btn btn-outline-secondary btn-sm w-100 me-2">
-                View
-              </a>
-
-              <a href="/admin/movies/edit/<%= movie._id %>" class="btn btn-outline-warning btn-sm w-100 me-2">
-                Edit
-              </a>
-
             </div>
 
           </div>
@@ -147,10 +91,13 @@
     const title = document.getElementById("title");
 
     toggleButton.addEventListener("click", () => {
-      sidebar.classList.toggle("collapsed");
-      mainContent.classList.toggle("expanded");
-      toggleButton.classList.toggle("collapsed");
-      title.classList.toggle("d-none");
+      if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("show");
+      } else {
+        sidebar.classList.toggle("collapsed");
+        mainContent.classList.toggle("expanded");
+        title.classList.toggle("d-none");
+      }
     });
   </script>
 </main>
